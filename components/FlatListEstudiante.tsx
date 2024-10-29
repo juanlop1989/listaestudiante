@@ -1,34 +1,41 @@
-import { View, Text, FlatList,StyleSheet } from 'react-native'
-import React from 'react'
-import { Estudiante } from '../Modelos/Estudiante'
+// Components/FlatListEstudiante.tsx
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { EstudianteContext } from '../Context/ContextApi';
 
-type Lista={
-    listaEstudiante:Estudiante[],
-}
-export default function FlatListEstudiante(props:Lista) {
+export default function FlatListEstudiante() {
+  const { listaEstudiante } = useContext(EstudianteContext);
+
   return (
     <View>
-       <FlatList data={props.listaEstudiante} 
-                keyExtractor={item => item.id.toString()}  
-                renderItem={({ item }) => (
-                    <View style={styles.itemContainer}>
-                            <Text style={styles.itemText}>{item.name}</Text>
-                    </View>
-                )}
-                scrollEnabled={true}
-            >
-        </FlatList>
+      <Text style={styles.title}>Listado de Alumnos</Text>
+      <FlatList 
+        data={listaEstudiante}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>{item.name}</Text>
+          </View>
+        )}
+        scrollEnabled={true}
+      />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-    itemContainer: {
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: '#ccc',
-    },
-    itemText: {
-      fontSize: 18,
-    },
-  });
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    padding: 10,
+    textAlign: 'center',
+  },
+  itemContainer: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  itemText: {
+    fontSize: 18,
+  },
+});

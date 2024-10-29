@@ -1,6 +1,11 @@
-import { createContext } from "react";
+// Context/contextapi.tsx
+import React, { createContext } from 'react';
+import { Estudiante } from '../Modelos/Estudiante';
 
-export const ContextEstudiante = createContext({
-    id: 0,
-    nombre: ""
-})
+export const EstudianteContext = createContext<{
+  listaEstudiante: Estudiante[];
+  agregarEstudiante: () => void;
+}>({
+  listaEstudiante: [],
+  agregarEstudiante: () => {},
+});
